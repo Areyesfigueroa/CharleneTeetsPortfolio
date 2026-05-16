@@ -17,18 +17,23 @@ export default function Header() {
       </div>
       <nav className="w-full bg-gray-500 bg-opacity-50 backdrop-blur-md">
         <ul className="flex flex-row justify-evenly items-center list-none m-0 p-0 py-3">
-          {NAV_LINKS.map(({ label, href }) => (
-            <li key={label}>
-              <a
-                href={href}
-                onClick={() => setActivePage(label)}
-                className={`text-sm no-underline transition-colors duration-150 hover:text-blue-300 ${
-                  activePage === label ? 'text-blue-800' : ''
-                }`}
-              >
-                {label}
-              </a>
-            </li>
+          {NAV_LINKS.map(({ label, href }, index) => (
+            <>
+              <li key={label}>
+                <a
+                  href={href}
+                  onClick={() => setActivePage(label)}
+                  className={`text-sm no-underline transition-colors duration-150 hover:text-blue-300 ${
+                    activePage === label ? 'text-blue-800' : ''
+                  }`}
+                >
+                  {label}
+                </a>
+              </li>
+              {index < NAV_LINKS.length - 1 && (
+                <li key={`divider-${index}`} className="text-white select-none">|</li>
+              )}
+            </>
           ))}
         </ul>
       </nav>
