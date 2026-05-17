@@ -32,6 +32,7 @@ export default function App() {
           id="unreal-engine-demos"
           title="Unreal Engine Demos"
           description="Real-time demos and interactive scenes built in Unreal Engine."
+          muted
         >
           <CarouselSection videos={unrealDemoVideos} title="UE5 Demos" />
         </ProjectSection>
@@ -46,6 +47,7 @@ export default function App() {
           id="marketing-material"
           title="Marketing Material"
           description="3D renders and visuals produced for marketing and promotional use."
+          muted
         >
           <CarouselSection videos={marketingVideos} title="Marketing" />
         </ProjectSection>
