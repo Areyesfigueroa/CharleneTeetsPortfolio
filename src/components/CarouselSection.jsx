@@ -1,6 +1,7 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useState } from 'react'
 import VideoCard from './VideoCard'
+import VideoModal from './VideoModal'
 
 function ChevronLeft() {
   return (
@@ -19,6 +20,7 @@ function ChevronRight() {
 }
 
 export default function CarouselSection({ videos, title }) {
+  const [openIndex, setOpenIndex] = useState(null)
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', watchDrag: false })
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(true)
@@ -41,7 +43,7 @@ export default function CarouselSection({ videos, title }) {
   }, [emblaApi, updateButtons])
 
   return (
-    <div>
+    <>
       {title && (
         <p
           className="ml-[44px] mb-3 text-left text-sm font-medium"
@@ -69,9 +71,9 @@ export default function CarouselSection({ videos, title }) {
 
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex gap-3">
-          {videos.map((video) => (
+          {videos.map((video, index) => (
             <div key={video.youtubeId} className="flex-[0_0_auto]">
-              <VideoCard video={video} />
+              <VideoCard video={video} onClick={() => setOpenIndex(index)} />
             </div>
           ))}
         </div>
@@ -93,6 +95,15 @@ export default function CarouselSection({ videos, title }) {
         <ChevronRight />
       </button>
     </div>
-    </div>
+
+    {openIndex !== null && (
+      <VideoModal
+        videos={videos}
+        initialIndex={openIndex}
+        title={title}
+        onClose={() => setOpenIndex(null)}
+      />
+    )}
+  </>
   )
 }

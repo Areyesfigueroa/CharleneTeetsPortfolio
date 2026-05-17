@@ -1,4 +1,4 @@
-export default function VideoCard({ video }) {
+export default function VideoCard({ video, onClick }) {
   const {
     title,
     description,
@@ -9,12 +9,17 @@ export default function VideoCard({ video }) {
 
   const href = youtubeId ? `https://www.youtube.com/watch?v=${youtubeId}` : '#'
 
+  const handleClick = onClick
+    ? (e) => { e.preventDefault(); onClick() }
+    : undefined
+
   return (
     <a
       href={href}
-      target="_blank"
+      target={onClick ? undefined : '_blank'}
       rel="noopener noreferrer"
       className="block w-[320px] no-underline"
+      onClick={handleClick}
     >
       <div
         className="relative w-[320px] h-[180px] bg-cover bg-center overflow-hidden"
