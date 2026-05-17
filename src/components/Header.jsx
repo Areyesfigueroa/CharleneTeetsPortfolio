@@ -15,7 +15,10 @@ export default function Header() {
         <h1 className="text-3xl font-bold m-0">Charlene Teets</h1>
         <p className="text-sm mt-1 m-0">3D Generalist</p>
       </div>
-      <nav className="w-full bg-gray-500 bg-opacity-50 backdrop-blur-md">
+      <nav
+        className="w-full bg-fixed bg-cover bg-center"
+        style={{ backgroundImage: 'url(https://picsum.photos/900/24)' }}
+      >
         <ul className="flex flex-row justify-evenly items-center list-none m-0 p-0 py-3 w-[900px] max-w-full mx-auto">
           {NAV_LINKS.map(({ label, href }, index) => (
             <>
