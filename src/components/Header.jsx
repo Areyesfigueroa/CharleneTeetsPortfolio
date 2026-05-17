@@ -16,7 +16,7 @@ export default function Header() {
         <p className="text-sm mt-1 m-0">3D Generalist</p>
       </div>
       <nav className="w-full bg-gray-500 bg-opacity-50 backdrop-blur-md">
-        <ul className="flex flex-row justify-evenly items-center list-none m-0 p-0 py-3">
+        <ul className="flex flex-row justify-evenly items-center list-none m-0 p-0 py-3 w-[900px] max-w-full mx-auto">
           {NAV_LINKS.map(({ label, href }, index) => (
             <>
               <li key={label}>
