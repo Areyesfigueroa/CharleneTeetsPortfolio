@@ -1,5 +1,6 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useState } from 'react'
+import VideoCard from './VideoCard'
 
 function XIcon() {
   return (
@@ -29,11 +30,13 @@ export default function VideoModal({ onClose, videos, initialIndex = 0, title })
   const [emblaRef, emblaApi] = useEmblaCarousel({ startIndex: initialIndex })
   const [canScrollPrev, setCanScrollPrev] = useState(initialIndex > 0)
   const [canScrollNext, setCanScrollNext] = useState(initialIndex < videos.length - 1)
+  const [currentIndex, setCurrentIndex] = useState(initialIndex)
 
   const updateButtons = useCallback(() => {
     if (!emblaApi) return
     setCanScrollPrev(emblaApi.canScrollPrev())
     setCanScrollNext(emblaApi.canScrollNext())
+    setCurrentIndex(emblaApi.selectedScrollSnap())
   }, [emblaApi])
 
   useEffect(() => {
@@ -101,7 +104,7 @@ export default function VideoModal({ onClose, videos, initialIndex = 0, title })
             {videos.map((video) => (
               <div
                 key={video.youtubeId}
-                className="flex-[0_0_100%] h-full flex flex-col md:flex-row gap-6 px-16 pb-8"
+                className="flex-[0_0_100%] h-full flex flex-col md:flex-row gap-6 px-16 py-8"
               >
                 {/* iframe — 2/3 */}
                 <div className="w-full md:w-2/3 max-w-[922px]">
@@ -143,6 +146,25 @@ export default function VideoModal({ onClose, videos, initialIndex = 0, title })
         )}
       </div>
       </div>
+
+      {/* Thumbnail strip */}
+      {videos.length > 1 && (
+        <div className="flex-shrink-0 py-4 px-16 overflow-x-auto">
+          <div className="flex gap-3">
+            {videos.map((video, index) => (
+              <VideoCard
+                key={video.youtubeId}
+                video={video}
+                isSelected={index === currentIndex}
+                onClick={() => {
+                  setCurrentIndex(index)
+                  emblaApi?.scrollTo(index)
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }
