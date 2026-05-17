@@ -3,12 +3,14 @@ import NavigationCard from './components/NavigationCard'
 import PageLayout from './components/PageLayout'
 import ProjectSection from './components/ProjectSection'
 import CarouselSection from './components/CarouselSection'
+import ImageCarousel from './components/ImageCarousel'
 import {
   environmentVideos,
   unrealDemoVideos,
   droneVideos,
   marketingVideos,
 } from './data/videoData'
+import { imageGalleries } from './data/imageData'
 
 export default function App() {
   return (
@@ -50,6 +52,19 @@ export default function App() {
           muted
         >
           <CarouselSection videos={marketingVideos} title="Marketing" />
+        </ProjectSection>
+        <ProjectSection
+          id="graphic-design"
+          title="Graphic Design"
+          description="A selection of graphic design work spanning branding, concept art, and typography."
+        >
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {imageGalleries.map((gallery) => (
+              <div key={gallery.title} className="max-w-[445px]">
+                <ImageCarousel images={gallery.images} title={gallery.title} />
+              </div>
+            ))}
+          </div>
         </ProjectSection>
       </PageLayout>
     </>
