@@ -3,30 +3,12 @@ import NavigationCard from './components/NavigationCard'
 import PageLayout from './components/PageLayout'
 import ProjectSection from './components/ProjectSection'
 import CarouselSection from './components/CarouselSection'
-
-const environmentVideos = [
-  {
-    title: 'Forest Demo',
-    description: 'A walkthrough of the forest environment showcasing lighting, foliage density, and atmospheric effects.',
-    youtubeId: 'abc123',
-    thumbnailImg: 'https://picsum.photos/320/180',
-    duration: '2:34',
-  },
-  {
-    title: 'Cave System Flythrough',
-    description: 'Real-time flythrough of a procedurally generated cave system built in Unreal Engine 5.',
-    youtubeId: 'def456',
-    thumbnailImg: 'https://picsum.photos/320/180',
-    duration: '1:12',
-  },
-  {
-    title: 'Desert Biome',
-    description: 'Desert environment with dynamic wind, sand particle simulation, and distant heat haze.',
-    youtubeId: 'ghi789',
-    thumbnailImg: 'https://picsum.photos/320/180',
-    duration: '3:05',
-  },
-]
+import {
+  environmentVideos,
+  unrealDemoVideos,
+  droneVideos,
+  marketingVideos,
+} from './data/videoData'
 
 export default function App() {
   return (
@@ -50,17 +32,23 @@ export default function App() {
           id="unreal-engine-demos"
           title="Unreal Engine Demos"
           description="Real-time demos and interactive scenes built in Unreal Engine."
-        />
+        >
+          <CarouselSection videos={unrealDemoVideos} title="UE5 Demos" />
+        </ProjectSection>
         <ProjectSection
           id="drone-work"
           title="Drone Work Low Poly"
           description="Low poly drone footage and aerial assets crafted for stylized projects."
-        />
+        >
+          <CarouselSection videos={droneVideos} title="Drone Footage" />
+        </ProjectSection>
         <ProjectSection
           id="marketing-material"
           title="Marketing Material"
           description="3D renders and visuals produced for marketing and promotional use."
-        />
+        >
+          <CarouselSection videos={marketingVideos} title="Marketing" />
+        </ProjectSection>
       </PageLayout>
     </>
   )
