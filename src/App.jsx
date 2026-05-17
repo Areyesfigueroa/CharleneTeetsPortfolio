@@ -1,6 +1,7 @@
 import Header from './components/Header'
 import NavigationCard from './components/NavigationCard'
 import PageLayout from './components/PageLayout'
+import ProjectSection from './components/ProjectSection'
 
 export default function App() {
   return (
@@ -13,12 +14,26 @@ export default function App() {
           <NavigationCard backgroundImage={'https://picsum.photos/233/411'} href="#drone-work">Drone Work Low Poly</NavigationCard>
           <NavigationCard backgroundImage={'https://picsum.photos/233/411'} href="#marketing-material">Marketing Material</NavigationCard>
         </div>
-
-        {/* Placeholder sections — replace with real content components */}
-        <section id="environment-art" className="py-16">Environment Art section</section>
-        <section id="unreal-engine-demos" className="py-16">Unreal Engine Demos section</section>
-        <section id="drone-work" className="py-16">Drone Work Low Poly section</section>
-        <section id="marketing-material" className="py-16">Marketing Material section</section>
+        <ProjectSection
+          id="environment-art"
+          title="Environment Art"
+          description="A collection of environment art created for games and interactive experiences."
+        />
+        <ProjectSection
+          id="unreal-engine-demos"
+          title="Unreal Engine Demos"
+          description="Real-time demos and interactive scenes built in Unreal Engine."
+        />
+        <ProjectSection
+          id="drone-work"
+          title="Drone Work Low Poly"
+          description="Low poly drone footage and aerial assets crafted for stylized projects."
+        />
+        <ProjectSection
+          id="marketing-material"
+          title="Marketing Material"
+          description="3D renders and visuals produced for marketing and promotional use."
+        />
       </PageLayout>
     </>
   )
