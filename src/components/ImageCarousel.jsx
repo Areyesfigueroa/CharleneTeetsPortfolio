@@ -1,5 +1,6 @@
 import useEmblaCarousel from 'embla-carousel-react'
 import { useCallback, useEffect, useState } from 'react'
+import ExpandedGalleryModal from './ExpandedGalleryModal'
 
 function ChevronLeft() {
   return (
@@ -19,6 +20,7 @@ function ChevronRight() {
 
 export default function ImageCarousel({ images, title }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [expandedIndex, setExpandedIndex] = useState(null)
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(images.length > 1)
 
@@ -51,79 +53,93 @@ export default function ImageCarousel({ images, title }) {
   }, [mainApi])
 
   return (
-    <div className="flex flex-col gap-3">
-      {title && (
-        <p className="text-center text-sm font-medium" style={{ color: 'var(--text-h)' }}>
-          {title}
-        </p>
-      )}
+    <>
+      <div className="flex flex-col gap-3">
+        {title && (
+          <p className="text-center text-sm font-medium" style={{ color: 'var(--text-h)' }}>
+            {title}
+          </p>
+        )}
 
-      {/* Main carousel — arrows overlay inside the image */}
-      <div className="relative">
-        <button
-          onClick={() => mainApi?.scrollPrev()}
-          disabled={!canScrollPrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full border transition-opacity disabled:opacity-0 disabled:pointer-events-none"
-          style={{
-            backgroundColor: 'var(--bg)',
-            borderColor: 'var(--border)',
-            color: 'var(--text-h)',
-            boxShadow: 'var(--shadow)',
-            cursor: 'pointer',
-          }}
-          aria-label="Previous image"
-        >
-          <ChevronLeft />
-        </button>
+        {/* Main carousel — arrows overlay inside the image */}
+        <div className="relative">
+          <button
+            onClick={() => mainApi?.scrollPrev()}
+            disabled={!canScrollPrev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full border transition-opacity disabled:opacity-0 disabled:pointer-events-none"
+            style={{
+              backgroundColor: 'var(--bg)',
+              borderColor: 'var(--border)',
+              color: 'var(--text-h)',
+              boxShadow: 'var(--shadow)',
+              cursor: 'pointer',
+            }}
+            aria-label="Previous image"
+          >
+            <ChevronLeft />
+          </button>
 
-        <div ref={mainRef} className="overflow-hidden">
-          <div className="flex">
-            {images.map(({ image }, i) => (
-              <div key={i} className="flex-[0_0_100%] aspect-[445/279]">
-                <img src={image} alt="" className="w-full h-full object-cover block" />
-              </div>
+          <div ref={mainRef} className="overflow-hidden">
+            <div className="flex">
+              {images.map(({ image, title: imgTitle }, i) => (
+                <div
+                  key={i}
+                  className="flex-[0_0_100%] aspect-[445/279] cursor-zoom-in"
+                  onClick={() => setExpandedIndex(i)}
+                >
+                  <img src={image} alt={imgTitle ?? ''} className="w-full h-full object-cover block" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={() => mainApi?.scrollNext()}
+            disabled={!canScrollNext}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full border transition-opacity disabled:opacity-0 disabled:pointer-events-none"
+            style={{
+              backgroundColor: 'var(--bg)',
+              borderColor: 'var(--border)',
+              color: 'var(--text-h)',
+              boxShadow: 'var(--shadow)',
+              cursor: 'pointer',
+            }}
+            aria-label="Next image"
+          >
+            <ChevronRight />
+          </button>
+        </div>
+
+        {/* Thumbnail strip */}
+        <div ref={thumbRef} className="overflow-hidden">
+          <div className="flex gap-2">
+            {images.map(({ thumbnailImg }, i) => (
+              <button
+                key={i}
+                onClick={() => handleThumbClick(i)}
+                className="flex-[0_0_auto] transition-opacity"
+                style={{ opacity: i === selectedIndex ? 1 : 0.45, cursor: 'pointer' }}
+                aria-label={`Go to image ${i + 1}`}
+              >
+                <img
+                  src={thumbnailImg}
+                  alt=""
+                  className="w-[86px] h-[48px] object-cover block"
+                  style={i === selectedIndex ? { outline: '2px solid var(--accent)', outlineOffset: '2px' } : {}}
+                />
+              </button>
             ))}
           </div>
         </div>
-
-        <button
-          onClick={() => mainApi?.scrollNext()}
-          disabled={!canScrollNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full border transition-opacity disabled:opacity-0 disabled:pointer-events-none"
-          style={{
-            backgroundColor: 'var(--bg)',
-            borderColor: 'var(--border)',
-            color: 'var(--text-h)',
-            boxShadow: 'var(--shadow)',
-            cursor: 'pointer',
-          }}
-          aria-label="Next image"
-        >
-          <ChevronRight />
-        </button>
       </div>
 
-      {/* Thumbnail strip */}
-      <div ref={thumbRef} className="overflow-hidden">
-        <div className="flex gap-2">
-          {images.map(({ thumbnailImg }, i) => (
-            <button
-              key={i}
-              onClick={() => handleThumbClick(i)}
-              className="flex-[0_0_auto] transition-opacity"
-              style={{ opacity: i === selectedIndex ? 1 : 0.45, cursor: 'pointer' }}
-              aria-label={`Go to image ${i + 1}`}
-            >
-              <img
-                src={thumbnailImg}
-                alt=""
-                className="w-[86px] h-[48px] object-cover block"
-                style={i === selectedIndex ? { outline: '2px solid var(--accent)', outlineOffset: '2px' } : {}}
-              />
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
+      {expandedIndex !== null && (
+        <ExpandedGalleryModal
+          images={images}
+          initialIndex={expandedIndex}
+          onClose={() => setExpandedIndex(null)}
+        />
+      )}
+    </>
   )
 }
