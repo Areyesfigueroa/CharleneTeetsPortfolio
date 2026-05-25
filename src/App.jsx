@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import NavigationCard from "./components/NavigationCard";
 import PageLayout from "./components/PageLayout";
 import ProjectSection from "./components/ProjectSection";
@@ -97,6 +98,7 @@ Implemented low-poly modeling in Maya, animated dynamic mesh movements, and exec
           <CarouselSection videos={intelDroneVideos} title="Drone Light Show" />
         </ProjectSection>
       </PageLayout>
+      <Footer />
     </>
   );
 }
