@@ -1,0 +1,55 @@
+import {
+  environmentVideos,
+  unrealDemoVideos,
+  droneVideos,
+  marketingVideos,
+  intelDroneVideos,
+} from './videoData'
+
+export const projectSections = [
+  {
+    id: 'environment-art',
+    title: 'Environment Art',
+    navLabel: 'Environment Art',
+    backgroundImage: 'https://picsum.photos/seed/nav_env/233/411',
+    description: 'A collection of environment art created for games and interactive experiences.',
+    carouselTitle: 'Environments',
+    videos: environmentVideos,
+  },
+  {
+    id: 'unreal-engine-demos',
+    title: 'Unreal Engine Demos',
+    navLabel: 'Unreal Engine Demos',
+    backgroundImage: 'https://picsum.photos/seed/nav_ue5/233/411',
+    description: 'Real-time demos and interactive scenes built in Unreal Engine.',
+    carouselTitle: 'UE5 Demos',
+    videos: unrealDemoVideos,
+  },
+  {
+    id: 'drone-work',
+    title: 'Drone Work Low Poly',
+    navLabel: 'Drone Work Low Poly',
+    backgroundImage: 'https://picsum.photos/seed/nav_drone/233/411',
+    description: 'Low poly drone footage and aerial assets crafted for stylized projects.',
+    carouselTitle: 'Drone Footage',
+    videos: droneVideos,
+  },
+  {
+    id: 'marketing-material',
+    title: 'Marketing Material',
+    navLabel: 'Marketing Material',
+    backgroundImage: 'https://picsum.photos/seed/nav_mkt/233/411',
+    description: '3D renders and visuals produced for marketing and promotional use.',
+    carouselTitle: 'Marketing',
+    videos: marketingVideos,
+  },
+  {
+    id: 'intel-drone-light-show',
+    title: 'INTEL - DRONE  LIGHT  SHOW  ANIMATOR - Low  Poly  Modeling',
+    navLabel: 'Drone Light Show',
+    backgroundImage: 'https://picsum.photos/seed/nav_intel/233/411',
+    description: `Lead and design 3D animations by utilizing a large, unrestricted environment that showcases the power of Intel drone light show technology for tier-one customers. Designed over 21 successful animations for tier-one customer events, including companies such as; Amazon, Netflix, Disney Malaysia, and the Taiwan Government, resulting to return customers and high visibility for the end client's product release, logo reveals, or events.\nImplemented low-poly modeling in Maya, animated dynamic mesh movements, and executed technological requirements with Pflow in 3dsmax to translate concept art into 3D vertex focused elements. Demonstrated reliable and effective communication globally across different cultures and customers by building quality relationships and trust to satisfy/surpass their original goals and expectations.`,
+    carouselTitle: 'Drone Light Show',
+    videos: intelDroneVideos,
+  },
+]
