@@ -77,6 +77,44 @@ export const droneVideos = [
   },
 ]
 
+export const intelDroneVideos = [
+  {
+    title: 'Amazon — Logo Reveal',
+    description: 'Over 500 drones form the Amazon smile logo in a synchronized night-sky reveal for a tier-one product launch event.',
+    youtubeId: 'intel_drone_amazon',
+    thumbnailImg: 'https://picsum.photos/seed/drone_amazon/320/180',
+    duration: '1:20',
+  },
+  {
+    title: 'Netflix — Show Premiere',
+    description: 'Low-poly drone formation spells out the Netflix wordmark and transitions into a streaming wave pattern above the premiere venue.',
+    youtubeId: 'intel_drone_netflix',
+    thumbnailImg: 'https://picsum.photos/seed/drone_netflix/320/180',
+    duration: '1:45',
+  },
+  {
+    title: 'Disney Malaysia — Character Animation',
+    description: 'Iconic Disney character silhouettes built from 800 synchronized drones, animating through a choreographed sequence over Kuala Lumpur.',
+    youtubeId: 'intel_drone_disney',
+    thumbnailImg: 'https://picsum.photos/seed/drone_disney/320/180',
+    duration: '2:10',
+  },
+  {
+    title: 'Taiwan Government — National Day',
+    description: 'Patriotic formation display for the Taiwan National Day ceremony, featuring the national flag and map rendered in low-poly drone geometry.',
+    youtubeId: 'intel_drone_taiwan',
+    thumbnailImg: 'https://picsum.photos/seed/drone_taiwan/320/180',
+    duration: '3:05',
+  },
+  {
+    title: 'Low-Poly Mesh Breakdown',
+    description: 'Process walkthrough of how concept art is translated into 3D vertex-focused elements using Maya modeling and PFlow in 3ds Max.',
+    youtubeId: 'intel_drone_process',
+    thumbnailImg: 'https://picsum.photos/seed/drone_process/320/180',
+    duration: '4:30',
+  },
+]
+
 export const marketingVideos = [
   {
     title: 'Product Reveal — Concept X',

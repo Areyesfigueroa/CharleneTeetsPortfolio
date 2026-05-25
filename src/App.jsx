@@ -1,27 +1,48 @@
-import Header from './components/Header'
-import NavigationCard from './components/NavigationCard'
-import PageLayout from './components/PageLayout'
-import ProjectSection from './components/ProjectSection'
-import CarouselSection from './components/CarouselSection'
-import ImageCarousel from './components/ImageCarousel'
+import Header from "./components/Header";
+import NavigationCard from "./components/NavigationCard";
+import PageLayout from "./components/PageLayout";
+import ProjectSection from "./components/ProjectSection";
+import CarouselSection from "./components/CarouselSection";
+import ImageCarousel from "./components/ImageCarousel";
 import {
   environmentVideos,
   unrealDemoVideos,
   droneVideos,
   marketingVideos,
-} from './data/videoData'
-import { imageGalleries } from './data/imageData'
+  intelDroneVideos,
+} from "./data/videoData";
+import { imageGalleries } from "./data/imageData";
 
 export default function App() {
   return (
     <>
       <Header />
       <PageLayout>
-        <div className='hidden md:flex flex-row gap-4'>
-          <NavigationCard backgroundImage={'https://picsum.photos/233/411'} href="#environment-art">Environment Art</NavigationCard>
-          <NavigationCard backgroundImage={'https://picsum.photos/233/411'} href="#unreal-engine-demos">Unreal Engine Demos</NavigationCard>
-          <NavigationCard backgroundImage={'https://picsum.photos/233/411'} href="#drone-work">Drone Work Low Poly</NavigationCard>
-          <NavigationCard backgroundImage={'https://picsum.photos/233/411'} href="#marketing-material">Marketing Material</NavigationCard>
+        <div className="hidden md:flex flex-row gap-4">
+          <NavigationCard
+            backgroundImage={"https://picsum.photos/233/411"}
+            href="#environment-art"
+          >
+            Environment Art
+          </NavigationCard>
+          <NavigationCard
+            backgroundImage={"https://picsum.photos/233/411"}
+            href="#unreal-engine-demos"
+          >
+            Unreal Engine Demos
+          </NavigationCard>
+          <NavigationCard
+            backgroundImage={"https://picsum.photos/233/411"}
+            href="#drone-work"
+          >
+            Drone Work Low Poly
+          </NavigationCard>
+          <NavigationCard
+            backgroundImage={"https://picsum.photos/233/411"}
+            href="#marketing-material"
+          >
+            Marketing Material
+          </NavigationCard>
         </div>
         <ProjectSection
           id="environment-art"
@@ -66,7 +87,16 @@ export default function App() {
             ))}
           </div>
         </ProjectSection>
+        <ProjectSection
+          id="intel-drone-light-show"
+          title="INTEL - DRONE  LIGHT  SHOW  ANIMATOR - Low  Poly  Modeling"
+          description="Lead and design 3D animations by utilizing a large, unrestricted environment that showcases the power of Intel drone light show technology for tier-one customers. Designed over 21 successful animations for tier-one customer events, including companies such as; Amazon, Netflix, Disney Malaysia, and the Taiwan Government, resulting to return customers and high visibility for the end client’s product release, logo reveals, or events.
+Implemented low-poly modeling in Maya, animated dynamic mesh movements, and executed technological requirements with Pflow in 3dsmax to translate concept art into 3D vertex focused elements. Demonstrated reliable and effective communication globally across different cultures and customers by building quality relationships and trust to satisfy/surpass their original goals and expectations."
+          muted
+        >
+          <CarouselSection videos={intelDroneVideos} title="Drone Light Show" />
+        </ProjectSection>
       </PageLayout>
     </>
-  )
+  );
 }
