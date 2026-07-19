@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
-]
+  { label: "Projects", href: "/" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
+];
 
 export default function Header() {
-  const [activePage, setActivePage] = useState('Projects')
+  const location = useLocation();
 
   return (
     <header className="w-full">
@@ -17,29 +18,40 @@ export default function Header() {
       </div>
       <nav
         className="w-full bg-fixed bg-cover bg-center"
-        style={{ backgroundImage: 'url(https://picsum.photos/900/24)' }}
+        style={{ backgroundImage: "url(https://picsum.photos/900/24)" }}
       >
         <ul className="flex flex-row justify-evenly items-center list-none m-0 p-0 py-3 w-[900px] max-w-full mx-auto">
-          {NAV_LINKS.map(({ label, href }, index) => (
-            <>
-              <li key={label}>
-                <a
-                  href={href}
-                  onClick={() => setActivePage(label)}
-                  className={`text-sm no-underline transition-colors duration-150 hover:text-blue-300 ${
-                    activePage === label ? 'text-blue-800' : ''
-                  }`}
-                >
-                  {label}
-                </a>
-              </li>
-              {index < NAV_LINKS.length - 1 && (
-                <li key={`divider-${index}`} className="text-white select-none">|</li>
-              )}
-            </>
-          ))}
+          {NAV_LINKS.map(({ label, href, to }, index) => {
+            const isActive = to ? location.pathname === to : false;
+            const className = `text-sm no-underline transition-colors duration-150 hover:text-blue-300 ${
+              isActive ? "text-blue-800" : ""
+            }`;
+            return (
+              <>
+                <li key={label}>
+                  {to ? (
+                    <Link to={to} className={className}>
+                      {label}
+                    </Link>
+                  ) : (
+                    <a href={href} className={className}>
+                      {label}
+                    </a>
+                  )}
+                </li>
+                {index < NAV_LINKS.length - 1 && (
+                  <li
+                    key={`divider-${index}`}
+                    className="text-white select-none"
+                  >
+                    |
+                  </li>
+                )}
+              </>
+            );
+          })}
         </ul>
       </nav>
     </header>
-  )
+  );
 }
